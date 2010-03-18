@@ -1,8 +1,8 @@
 //
-//  TileWorld.h
-//  DCrawler
+//  SnakeTileWorld.h
+//  Snake Puzzle
 //
-//  Created by Amudi Sebastian on 3/14/10.
+//  Created by Amudi Sebastian on 3/18/10.
 //  Copyright 2010 amudi.org. All rights reserved.
 //
 
@@ -11,7 +11,7 @@
 @class Tile;
 @class Entity;
 
-@interface TileWorld : NSObject {
+@interface SnakeTileWorld : NSObject {
 	Tile ***tiles;
 	NSMutableArray *entities;
 	CGRect view;	// typically will be the same rect as the screen. in pixels. considered to be in opengl coord (0,0 in bottom left)
@@ -25,7 +25,7 @@
 
 - (void)loadLevel:(NSString *)levelFilename withTiles:(NSString *)imageFilename;
 
-- (TileWorld *)initWithFrame:(CGRect)frame;
+- (SnakeTileWorld *)initWithFrame:(CGRect)frame;
 - (void)draw;
 - (void)setCamera:(CGPoint)position;
 - (CGPoint)worldPosition:(CGPoint)screenPosition;

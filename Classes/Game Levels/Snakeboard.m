@@ -9,7 +9,7 @@
 #import "Snakeboard.h"
 #import "ResourceManager.h"
 #import "Entity.h"
-#import "TileWorld.h"
+#import "SnakeTileWorld.h"
 #import "Sprite.h"
 #import "Animation.h"
 #import "Snake.h"
@@ -19,7 +19,7 @@
 @implementation Snakeboard
 
 - (void)setupWorld {
-	tileWorld = [[TileWorld alloc] initWithFrame:self.frame];
+	tileWorld = [[SnakeTileWorld alloc] initWithFrame:self.frame];
 	[tileWorld setLandscape:landscape];
 	[tileWorld loadLevel:@"Snakeboard.txt" withTiles:@"Snakeboard_tiles.png"];
 //	Animation *playerAnimation = [[Animation alloc] initWithAnim:@"player_walk.png"];

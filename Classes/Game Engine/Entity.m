@@ -9,7 +9,7 @@
 #import "Entity.h"
 #import "ResourceManager.h"
 #import "Sprite.h"
-#import "TileWorld.h"
+#import "SnakeTileWorld.h"
 #import "Tile.h"
 #import "Rideable.h"
 
@@ -47,7 +47,7 @@
 	return NSOrderedAscending;
 }
 
-- (void)setWorld:(TileWorld *)newWorld {
+- (void)setWorld:(SnakeTileWorld *)newWorld {
 	world = newWorld;
 }
 

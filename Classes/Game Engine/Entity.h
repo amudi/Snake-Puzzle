@@ -9,12 +9,12 @@
 #import <Foundation/Foundation.h>
 
 @class Sprite;
-@class TileWorld;
+@class SnakeTileWorld;
 
 @interface Entity : NSObject {
 	CGPoint worldPos;	// specifies origin for physical representation in the game world. in pixels
 	Sprite *sprite;
-	TileWorld  *world;	// set when entity added to a TileWorld. used for tile collision detection
+	SnakeTileWorld  *world;	// set when entity added to a TileWorld. used for tile collision detection
 }
 
 @property (nonatomic, retain) Sprite *sprite;
@@ -23,7 +23,7 @@
 - (id)initWithPos:(CGPoint)pos sprite:(Sprite *)spr;
 - (void)drawAtPoint:(CGPoint)offset;
 - (void)update:(CGFloat)time;
-- (void)setWorld:(TileWorld *)newWorld;
+- (void)setWorld:(SnakeTileWorld *)newWorld;
 - (void)forceToPos:(CGPoint)pos;
 
 @end

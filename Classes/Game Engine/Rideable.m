@@ -8,7 +8,7 @@
 
 #import "Rideable.h"
 #import "Sprite.h"
-#import "TileWorld.h"
+#import "SnakeTileWorld.h"
 
 @implementation Rideable
 

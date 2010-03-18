@@ -7,7 +7,7 @@
 //
 
 #import "Snake.h"
-#import "TileWorld.h"
+#import "SnakeTileWorld.h"
 #import "Sprite.h"
 #import "ResourceManager.h"
 

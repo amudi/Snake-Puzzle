@@ -28,7 +28,6 @@
 		D05ECDA1115256C200B3FB26 /* Rideable.m in Sources */ = {isa = PBXBuildFile; fileRef = D05ECD98115256C200B3FB26 /* Rideable.m */; };
 		D05ECDA2115256C200B3FB26 /* Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = D05ECD9A115256C200B3FB26 /* Sprite.m */; };
 		D05ECDA3115256C200B3FB26 /* Tile.m in Sources */ = {isa = PBXBuildFile; fileRef = D05ECD9C115256C200B3FB26 /* Tile.m */; };
-		D05ECDA4115256C200B3FB26 /* TileWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = D05ECD9E115256C200B3FB26 /* TileWorld.m */; };
 		D05ECDA8115257B900B3FB26 /* Snake.m in Sources */ = {isa = PBXBuildFile; fileRef = D05ECDA7115257B900B3FB26 /* Snake.m */; };
 		D05ECDAD115257DC00B3FB26 /* Snakeboard.m in Sources */ = {isa = PBXBuildFile; fileRef = D05ECDAC115257DC00B3FB26 /* Snakeboard.m */; };
 		D05ECDC911525C3C00B3FB26 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D05ECDC811525C3C00B3FB26 /* AudioToolbox.framework */; };
@@ -41,6 +40,7 @@
 		D05ECEB61152629E00B3FB26 /* Snakeboard.txt in Resources */ = {isa = PBXBuildFile; fileRef = D05ECEB01152629E00B3FB26 /* Snakeboard.txt */; };
 		D05ECEB71152629E00B3FB26 /* Tail.png in Resources */ = {isa = PBXBuildFile; fileRef = D05ECEB11152629E00B3FB26 /* Tail.png */; };
 		D05ECEB81152629E00B3FB26 /* trimsqueak.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D05ECEB21152629E00B3FB26 /* trimsqueak.mp3 */; };
+		D05ECECF115264A600B3FB26 /* SnakeTileWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = D05ECECE115264A600B3FB26 /* SnakeTileWorld.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,8 +83,6 @@
 		D05ECD9A115256C200B3FB26 /* Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sprite.m; path = "Game Engine/Sprite.m"; sourceTree = "<group>"; };
 		D05ECD9B115256C200B3FB26 /* Tile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tile.h; path = "Game Engine/Tile.h"; sourceTree = "<group>"; };
 		D05ECD9C115256C200B3FB26 /* Tile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tile.m; path = "Game Engine/Tile.m"; sourceTree = "<group>"; };
-		D05ECD9D115256C200B3FB26 /* TileWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TileWorld.h; path = "Game Engine/TileWorld.h"; sourceTree = "<group>"; };
-		D05ECD9E115256C200B3FB26 /* TileWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TileWorld.m; path = "Game Engine/TileWorld.m"; sourceTree = "<group>"; };
 		D05ECDA6115257B900B3FB26 /* Snake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Snake.h; path = Entities/Snake.h; sourceTree = "<group>"; };
 		D05ECDA7115257B900B3FB26 /* Snake.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Snake.m; path = Entities/Snake.m; sourceTree = "<group>"; };
 		D05ECDAB115257DC00B3FB26 /* Snakeboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Snakeboard.h; path = "Game Levels/Snakeboard.h"; sourceTree = "<group>"; };
@@ -99,6 +97,8 @@
 		D05ECEB01152629E00B3FB26 /* Snakeboard.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Snakeboard.txt; path = Resources/Snakeboard.txt; sourceTree = "<group>"; };
 		D05ECEB11152629E00B3FB26 /* Tail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Tail.png; path = Resources/Tail.png; sourceTree = "<group>"; };
 		D05ECEB21152629E00B3FB26 /* trimsqueak.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = trimsqueak.mp3; path = Resources/trimsqueak.mp3; sourceTree = "<group>"; };
+		D05ECECD115264A600B3FB26 /* SnakeTileWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SnakeTileWorld.h; path = "Game Engine/SnakeTileWorld.h"; sourceTree = "<group>"; };
+		D05ECECE115264A600B3FB26 /* SnakeTileWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SnakeTileWorld.m; path = "Game Engine/SnakeTileWorld.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,8 +224,8 @@
 				D05ECD9A115256C200B3FB26 /* Sprite.m */,
 				D05ECD9B115256C200B3FB26 /* Tile.h */,
 				D05ECD9C115256C200B3FB26 /* Tile.m */,
-				D05ECD9D115256C200B3FB26 /* TileWorld.h */,
-				D05ECD9E115256C200B3FB26 /* TileWorld.m */,
+				D05ECECD115264A600B3FB26 /* SnakeTileWorld.h */,
+				D05ECECE115264A600B3FB26 /* SnakeTileWorld.m */,
 			);
 			name = "Game Engine";
 			sourceTree = "<group>";
@@ -337,9 +337,9 @@
 				D05ECDA1115256C200B3FB26 /* Rideable.m in Sources */,
 				D05ECDA2115256C200B3FB26 /* Sprite.m in Sources */,
 				D05ECDA3115256C200B3FB26 /* Tile.m in Sources */,
-				D05ECDA4115256C200B3FB26 /* TileWorld.m in Sources */,
 				D05ECDA8115257B900B3FB26 /* Snake.m in Sources */,
 				D05ECDAD115257DC00B3FB26 /* Snakeboard.m in Sources */,
+				D05ECECF115264A600B3FB26 /* SnakeTileWorld.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

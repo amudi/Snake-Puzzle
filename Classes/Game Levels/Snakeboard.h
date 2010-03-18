@@ -9,12 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "GLESGameState.h"
 
-@class TileWorld;
+@class SnakeTileWorld;
 @class Snake;
 
 @interface Snakeboard : GLESGameState {
-	TileWorld *tileWorld;
+	SnakeTileWorld *tileWorld;
 	Snake *player;
 }
+
+@property (nonatomic, readonly) int boardHeight;
+@property (nonatomic, readonly) int boardWidth;
 
 @end

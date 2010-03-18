@@ -18,25 +18,24 @@
 
 @implementation Snakeboard
 
+@dynamic boardHeight;
+@dynamic boardWidth;
+
 - (void)setupWorld {
 	tileWorld = [[SnakeTileWorld alloc] initWithFrame:self.frame];
 	[tileWorld setLandscape:landscape];
 	[tileWorld loadLevel:@"Snakeboard.txt" withTiles:@"Snakeboard_tiles.png"];
-//	Animation *playerAnimation = [[Animation alloc] initWithAnim:@"player_walk.png"];
-	//player = [[Snake alloc] initWithPos:CGPointMake(100, 100) sprite:[Sprite spriteWithAnimation:nil]];
 	
-	//[tileWorld addEntity:player];
 	[tileWorld setCamera:CGPointMake(100, 100)];
 	
-//	[playerAnimation autorelease];
-	[gResManager stopMusic];
-	[gResManager playMusic:@"trimsqueak.mp3"];
+	//[gResManager stopMusic];
+	//[gResManager playMusic:@"trimsqueak.mp3"];
 }
 
 - (void)Update {
 	float time = LOOP_TIMER_MINIMUM;
-	//[player update:time];
-	[tileWorld setCamera:[[[player positions] objectAtIndex:0] CGPointValue]];
+	
+	//[tileWorld setCamera:[[[player positions] objectAtIndex:0] CGPointValue]];
 	
 	[super updateEndGame:time];
 }
@@ -58,9 +57,19 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	UITouch *touch = [touches anyObject];
-	[player moveToPosition:[tileWorld worldPosition:[self touchPosition:touch]]];
+	//UITouch *touch = [touches anyObject];
+	
+	// check whether player touch left button or right button
+	//[player moveToPosition:[tileWorld worldPosition:[self touchPosition:touch]]];
 	[super touchEndGame];
+}
+
+- (int)getBoardHeight {
+	return [tileWorld worldHeight];
+}
+
+- (int)getBoardWidth {
+	return [tileWorld worldWidth];
 }
 
 - (void)dealloc {

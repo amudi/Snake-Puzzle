@@ -13,6 +13,7 @@
 
 @implementation Snake
 
+@synthesize direction;
 @synthesize celebrating;
 @synthesize speed;
 @synthesize headTextureName;
@@ -21,10 +22,10 @@
 @synthesize bodyBlockSize;
 @synthesize positions;
 
-- (id)initWithPos:(CGPoint)pos length:(NSInteger)length {
+- (id)initWithPos:(CGPoint)pos length:(unsigned int)length {
 	[super init];
 	bodyBlockSize = TILE_SIZE;
-	lastDirection = 3;	// facing right
+	direction = DIRECTION_EAST;	// facing right
 	celebrating = NO;
 	dying = NO;
 	speed = 200;	// default speed
@@ -33,6 +34,7 @@
 	if (bodyLength <= 0) {
 		bodyLength = 3;	// length minimum should be 3: head-body-tail
 	}
+	
 	positions = [NSMutableArray arrayWithCapacity:length];
 	
 	// make snake in straight line, facing right
@@ -43,26 +45,18 @@
 	return self;
 }
 
-- (void)moveToPosition:(CGPoint)point {
-	destPos = point;
-}
-
-- (BOOL)doneMoving {
-	CGPoint headLocation = [[positions objectAtIndex:0] CGPointValue];
-	return  headLocation.x == destPos.x && headLocation.y == destPos.y;
-}
-
 // force move the whole snake to pos, arrange body in a straight line
 - (void)forceToPos:(CGPoint)pos {
 	NSLog(@"forceToPos:%@, old positions: %@", pos, positions);
 	if ([world walkable:pos]) {
 		NSInteger i = 0;
-		for (id blockPosObject in positions) {
-			CGPoint blockPos = [blockPosObject CGPointValue];
-			blockPos.x = pos.x - (i * bodyBlockSize);
+		for (id currentBlockPosObject in positions) {
+			CGPoint currentBlockPos = [currentBlockPosObject CGPointValue];
+			CGPoint newBlockPos = CGPointMake(currentBlockPos.x - (i * bodyBlockSize), currentBlockPos.y);
+			[positions replaceObjectAtIndex:i withObject:[NSValue valueWithCGPoint:newBlockPos]];
+			[currentBlockPosObject release];
 			++i;
 		}
-		destPos = pos;
 	}
 	NSLog(@"New positions: %@", positions);
 }
@@ -81,6 +75,9 @@
 	if (dying) {
 		xSpeed = ySpeed = 0;
 	}
+	
+	// determine destination
+	CGPoint destPos = [self getDestination];
 	
 	NSMutableArray* revertPositions = [NSMutableArray arrayWithArray:positions];
 	CGPoint revertPos = [[revertPositions objectAtIndex:0] CGPointValue];
@@ -120,25 +117,25 @@
 	}
 		
 	NSString *facing = nil;
-	int direction = -1;
+	SnakeDirection nextDirection = DIRECTION_UNKNOWN;
 	if (dx != 0 || dy != 0) {
 		if (fabs(dx) > fabs(dy)) {
 			if (dx < 0) {
-				direction = 3;
+				nextDirection = DIRECTION_EAST;
 			} else {
-				direction = 1;
+				nextDirection = DIRECTION_WEST;
 			}
 		} else {
 			if (dy < 0) {
-				direction = 0;
+				nextDirection = DIRECTION_NORTH;
 			} else {
-				direction = 2;
+				nextDirection = DIRECTION_SOUTH;
 			}
 		}
-		lastDirection = direction;
+		direction = nextDirection;
 	}
 	
-	if (direction == -1) {
+	if (direction == DIRECTION_UNKNOWN) {
 		if (celebrating) {
 			facing = @"celebration";
 		} else {
@@ -146,13 +143,13 @@
 			NSString *idles[] = {
 				@"idle-up", @"idle-left", @"idle", @"idle-right"
 			};
-			facing = idles[lastDirection];
+			facing = idles[direction];
 		}
 	} else {
 		NSString *walks[] = {
 			@"walkup", @"walkleft", @"walkdown", @"walkright"
 		};
-		facing = walks[lastDirection];
+		facing = walks[direction];
 	}
 	
 	if (dying) {
@@ -172,12 +169,75 @@
 	
 }
 
-- (void)setWorld:(TileWorld *)newWorld {
+- (void)setWorld:(SnakeTileWorld *)newWorld {
 	world = newWorld;
 }
 
 - (void)drawAtPoint:(CGPoint)offset {
 	
+}
+
+- (CGPoint)getDestination {
+	CGPoint headPosition = [[positions objectAtIndex:0] CGPointValue];
+	CGPoint destination;
+	switch (direction) {
+		case DIRECTION_NORTH:
+			destination = CGPointMake(headPosition.x, IPHONE_WIDTH);
+			break;
+		case DIRECTION_WEST:
+			destination = CGPointMake(0, headPosition.y);
+			break;
+		case DIRECTION_SOUTH:
+			destination = CGPointMake(headPosition.x, 0);
+			break;
+		case DIRECTION_EAST:
+			destination = CGPointMake(IPHONE_HEIGHT, headPosition.y);
+			break;
+		default:
+			[NSException raise:NSInternalInconsistencyException format:@""];
+			break;
+	}
+	return destination;
+}
+
+- (void)turnLeft {
+	switch (direction) {
+		case DIRECTION_NORTH:
+			direction = DIRECTION_WEST;
+			break;
+		case DIRECTION_WEST:
+			direction = DIRECTION_SOUTH;
+			break;
+		case DIRECTION_SOUTH:
+			direction = DIRECTION_EAST;
+			break;
+		case DIRECTION_EAST:
+			direction = DIRECTION_NORTH;
+			break;
+		default:
+			[NSException raise:NSInternalInconsistencyException format:@""];
+			break;
+	}
+}
+
+- (void)turnRight {
+	switch (direction) {
+		case DIRECTION_NORTH:
+			direction = DIRECTION_EAST;
+			break;
+		case DIRECTION_WEST:
+			direction = DIRECTION_NORTH;
+			break;
+		case DIRECTION_SOUTH:
+			direction = DIRECTION_WEST;
+			break;
+		case DIRECTION_EAST:
+			direction = DIRECTION_SOUTH;
+			break;
+		default:
+			[NSException raise:NSInternalInconsistencyException format:@""];
+			break;
+	}
 }
 
 - (void)dealloc {

@@ -1,0 +1,51 @@
+//
+// Prefix header for all source files of the 'Snake Puzzle' target in the 'Snake Puzzle' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+	#import <UIKit/UIKit.h>
+	#import "pointmath.h"
+#endif
+
+// constant definitions
+#ifndef LOOP_TIMER_MINIMUM
+#define LOOP_TIMER_MINIMUM 0.033f
+#endif
+
+#ifndef PI
+#define PI 3.14159265f
+#endif
+
+#ifndef kMaxTextureSize
+#define kMaxTextureSize	1024
+#endif
+
+#ifndef TILE_SIZE
+#define TILE_SIZE 32
+#endif
+
+#ifndef IPHONE_WIDTH
+#define IPHONE_WIDTH 320
+#endif
+
+#ifndef IPHONE_HEIGHT
+#define IPHONE_HEIGHT 480
+#endif
+
+// sound stuff leaks memory in simulator, use this to hack SoundEngine calls
+#ifndef DEBUG_SOUND_ENABLED
+#define DEBUG_SOUND_ENABLED true
+#endif
+
+#ifndef STORAGE_FILENAME
+#define STORAGE_FILENAME @"appstorage"
+#endif
+
+#ifndef WINNING
+#define WINNING 1
+#endif
+
+#ifndef LOSING
+#define LOSING 2
+#endif

@@ -137,7 +137,6 @@
 	[entities removeObject:entity];
 }
 
-
 // used when tapping an area of the screen to move player
 - (CGPoint)worldPosition:(CGPoint)screenPosition {
 	CGFloat xoff, yoff;

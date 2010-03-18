@@ -41,6 +41,7 @@
 		D05ECEB71152629E00B3FB26 /* Tail.png in Resources */ = {isa = PBXBuildFile; fileRef = D05ECEB11152629E00B3FB26 /* Tail.png */; };
 		D05ECEB81152629E00B3FB26 /* trimsqueak.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D05ECEB21152629E00B3FB26 /* trimsqueak.mp3 */; };
 		D05ECECF115264A600B3FB26 /* SnakeTileWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = D05ECECE115264A600B3FB26 /* SnakeTileWorld.m */; };
+		D05ED06F1152958800B3FB26 /* Snake Puzzle.png in Resources */ = {isa = PBXBuildFile; fileRef = D05ED06E1152958800B3FB26 /* Snake Puzzle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,6 +100,7 @@
 		D05ECEB21152629E00B3FB26 /* trimsqueak.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = trimsqueak.mp3; path = Resources/trimsqueak.mp3; sourceTree = "<group>"; };
 		D05ECECD115264A600B3FB26 /* SnakeTileWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SnakeTileWorld.h; path = "Game Engine/SnakeTileWorld.h"; sourceTree = "<group>"; };
 		D05ECECE115264A600B3FB26 /* SnakeTileWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SnakeTileWorld.m; path = "Game Engine/SnakeTileWorld.m"; sourceTree = "<group>"; };
+		D05ED06E1152958800B3FB26 /* Snake Puzzle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Snake Puzzle.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 				2899E5210DE3E06400AC0155 /* Snake_PuzzleViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Snake_Puzzle-Info.plist */,
+				D05ED06E1152958800B3FB26 /* Snake Puzzle.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				D05ECEB61152629E00B3FB26 /* Snakeboard.txt in Resources */,
 				D05ECEB71152629E00B3FB26 /* Tail.png in Resources */,
 				D05ECEB81152629E00B3FB26 /* trimsqueak.mp3 in Resources */,
+				D05ED06F1152958800B3FB26 /* Snake Puzzle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

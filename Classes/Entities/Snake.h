@@ -8,40 +8,51 @@
 
 #import <Foundation/Foundation.h>
 
-@class TileWorld;
+@class SnakeTileWorld;
+
+typedef enum {
+	DIRECTION_UNKNOWN = -1,
+	DIRECTION_NORTH = 0,
+	DIRECTION_WEST = 1,
+	DIRECTION_SOUTH = 2,
+	DIRECTION_EAST = 3,
+} SnakeDirection;
 
 @interface Snake : NSObject {
-	CGPoint destPos;
-	NSInteger lastDirection;
+	SnakeDirection direction;
 	BOOL celebrating;
 	BOOL dying;
-	NSInteger speed;
-	TileWorld *world;
+	int speed;
+	SnakeTileWorld *world;
 @private
 	NSString *headTextureName;
 	NSString *tailTextureName;
 	NSString *bodyTextureName;
-	NSMutableArray *positions;	// top left coordinates of snake's blocks
-	NSInteger bodyBlockSize;
+	NSMutableArray *positions;	// array of tiles (CGPoint) coordinates of snake's blocks
+	int bodyBlockSize;
 }
 
+@property (readonly) SnakeDirection direction;
 @property (nonatomic) BOOL celebrating;
-@property (nonatomic, assign) NSInteger speed;
+@property (nonatomic, assign) int speed;
 @property (nonatomic, retain) NSString *headTextureName;
 @property (nonatomic, retain) NSString *tailTextureName;
 @property (nonatomic, retain) NSString *bodyTextureName;
-@property (nonatomic, assign) NSInteger bodyBlockSize;
+@property (nonatomic, assign) int bodyBlockSize;
 @property (nonatomic, readonly) NSMutableArray *positions;
 
-- (id)initWithPos:(CGPoint)pos length:(NSInteger)length;
-- (void)moveToPosition:(CGPoint)point;
-- (BOOL)doneMoving;
+- (id)initWithPos:(CGPoint)pos length:(unsigned int)length;
 - (void)dieWithAnimation:(NSString *)deathAnim;
 - (void)addBody;
 
 - (void)drawAtPoint:(CGPoint)offset;
 - (void)update:(CGFloat)time;
-- (void)setWorld:(TileWorld *)newWorld;
+- (void)setWorld:(SnakeTileWorld *)newWorld;
 - (void)forceToPos:(CGPoint)pos;
+
+// movement
+- (void)turnLeft;
+- (void)turnRight;
+- (CGPoint)getDestination;
 
 @end

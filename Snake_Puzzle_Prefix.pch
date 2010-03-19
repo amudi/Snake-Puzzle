@@ -10,7 +10,7 @@
 
 // constant definitions
 #ifndef LOOP_TIMER_MINIMUM
-#define LOOP_TIMER_MINIMUM 0.033f
+#define LOOP_TIMER_MINIMUM 0.01667f
 #endif
 
 #ifndef PI

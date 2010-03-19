@@ -10,13 +10,14 @@
 
 @class Tile;
 @class Entity;
+@class Snake;
 
 @interface SnakeTileWorld : NSObject {
 	Tile ***tiles;
 	NSMutableArray *entities;
+	Snake *snake;
 	CGRect view;	// typically will be the same rect as the screen. in pixels. considered to be in opengl coord (0,0 in bottom left)
 	int worldWidth, worldHeight;	// in tiles, defines dimension of ***tiles
-	int cameraX, cameraY;	// in pixels, relative to world origin (0,0). view will be centered around this point
 	BOOL landscape;
 }
 
@@ -27,14 +28,12 @@
 
 - (SnakeTileWorld *)initWithFrame:(CGRect)frame;
 - (void)draw;
-- (void)setCamera:(CGPoint)position;
 - (CGPoint)worldPosition:(CGPoint)screenPosition;
 
 - (void)addEntity:(Entity *)entity;
 - (void)removeEntity:(Entity *)entity;
+- (void)setSnake:(Snake *)newSnake;
 - (Tile *)tileAt:(CGPoint)worldPosition;
 - (BOOL)walkable:(CGPoint)point;
-
-- (NSArray *)entitiesNear:(CGPoint)point withRadius:(float)radius;
 
 @end

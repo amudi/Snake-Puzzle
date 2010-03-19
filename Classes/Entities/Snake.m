@@ -22,7 +22,7 @@
 @synthesize bodyBlockSize;
 @synthesize positions;
 
-- (id)initWithPos:(CGPoint)pos length:(unsigned int)length {
+- (id)initWithPos:(CGPoint)pos length:(NSInteger)length {
 	[super init];
 	bodyBlockSize = TILE_SIZE;
 	direction = DIRECTION_EAST;	// facing right
@@ -30,16 +30,22 @@
 	dying = NO;
 	speed = 200;	// default speed
 
+	headTextureName = @"Head.png";
+	bodyTextureName = @"Body.png";
+	tailTextureName = @"Tail.png";
+	
 	NSInteger bodyLength = length;
-	if (bodyLength <= 0) {
+	if (bodyLength <= 3) {
 		bodyLength = 3;	// length minimum should be 3: head-body-tail
 	}
 	
-	positions = [NSMutableArray arrayWithCapacity:length];
+	positions = [[NSMutableArray alloc] initWithCapacity:length];
 	
 	// make snake in straight line, facing right
 	for (int i = 0; i < bodyLength; ++i) {
-		[positions addObject:[NSValue valueWithCGPoint:CGPointMake(pos.x - (bodyLength * i), pos.y)]];
+		CGPoint bodyPos = CGPointMake(pos.x - i, pos.y);
+		NSValue *bodyPosValue = [[NSValue value:&bodyPos withObjCType:@encode(CGPoint)] retain];
+		[positions addObject:bodyPosValue];
 	}
 	
 	return self;
@@ -174,7 +180,16 @@
 }
 
 - (void)drawAtPoint:(CGPoint)offset {
-	
+	for (NSValue *currentObject in positions) {
+		GLTexture *bodyTex = [gResManager getTexture:bodyTextureName];
+		CGPoint worldPos = [currentObject CGPointValue];
+		CGPoint screenPos = CGPointMake(offset.x, offset.y);
+		screenPos.x += worldPos.x;
+		screenPos.y += worldPos.y;
+		screenPos.x *= TILE_SIZE;
+		screenPos.y *= TILE_SIZE;
+		[bodyTex drawAtPoint:screenPos];
+	}
 }
 
 - (CGPoint)getDestination {

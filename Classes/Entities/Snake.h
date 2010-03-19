@@ -39,9 +39,9 @@ typedef enum {
 @property (nonatomic, retain) NSString *tailTextureName;
 @property (nonatomic, retain) NSString *bodyTextureName;
 @property (nonatomic, assign) int bodyBlockSize;
-@property (nonatomic, readonly) NSMutableArray *positions;
+@property (nonatomic, retain) NSMutableArray *positions;
 
-- (id)initWithPos:(CGPoint)pos length:(unsigned int)length;
+- (id)initWithPos:(CGPoint)pos length:(NSInteger)length;
 - (void)dieWithAnimation:(NSString *)deathAnim;
 - (void)addBody;
 

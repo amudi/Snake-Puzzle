@@ -26,10 +26,11 @@
 	[tileWorld setLandscape:landscape];
 	[tileWorld loadLevel:@"Snakeboard.txt" withTiles:@"Snakeboard_tiles.png"];
 	
-	[tileWorld setCamera:CGPointMake(100, 100)];
+	player = [[Snake alloc] initWithPos:CGPointMake(5.0f, 5.0f) length:3];
+	[tileWorld setSnake:player];
 	
-	//[gResManager stopMusic];
-	//[gResManager playMusic:@"trimsqueak.mp3"];
+	[gResManager stopMusic];
+	[gResManager playMusic:@"trimsqueak.mp3"];
 }
 
 - (void)Update {
@@ -46,6 +47,9 @@
 	
 	[tileWorld draw];
 	
+	int fps = [((Snake_PuzzleAppDelegate *)m_pManager) getFramesPerSecond];
+	NSLog(@"FPS:%d", fps);
+	
 	[self swapBuffers];
 }
 
@@ -57,10 +61,10 @@
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	//UITouch *touch = [touches anyObject];
+	UITouch *touch = [touches anyObject];
 	
 	// check whether player touch left button or right button
-	//[player moveToPosition:[tileWorld worldPosition:[self touchPosition:touch]]];
+	[tileWorld worldPosition:[self touchPosition:touch]];
 	[super touchEndGame];
 }
 

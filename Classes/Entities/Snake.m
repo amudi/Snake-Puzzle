@@ -188,39 +188,30 @@
 		dying = YES;
 		return;
 	} else {
+		// remove from last element, then insert at index 0
+		[positions removeLastObject];
+		CGPoint head = [[positions objectAtIndex:0] CGPointValue];
+		NSValue *newHead;
+		CGPoint newHeadPoint;
 		switch (direction) {
-			case DIRECTION_NORTH: 
-				for (int i = 0; i < bodyLength; ++i) {
-					CGPoint currentBodyPoint = [[positions objectAtIndex:i] CGPointValue];
-					CGPoint newBodyPoint = CGPointMake(currentBodyPoint.x, currentBodyPoint.y + 1);
-					[positions replaceObjectAtIndex:i withObject:[[NSValue valueWithCGPoint:newBodyPoint] retain]];
-				}
+			case DIRECTION_NORTH:
+				newHeadPoint = CGPointMake(head.x, head.y + 1);
 				break;
 			case DIRECTION_WEST:
-				for (int i = 0; i < bodyLength; ++i) {
-					CGPoint currentBodyPoint = [[positions objectAtIndex:i] CGPointValue];
-					CGPoint newBodyPoint = CGPointMake(currentBodyPoint.x - 1, currentBodyPoint.y);
-					[positions replaceObjectAtIndex:i withObject:[[NSValue valueWithCGPoint:newBodyPoint] retain]];
-				}
+				newHeadPoint = CGPointMake(head.x - 1, head.y);
 				break;
 			case DIRECTION_SOUTH:
-				for (int i = 0; i < bodyLength; ++i) {
-					CGPoint currentBodyPoint = [[positions objectAtIndex:i] CGPointValue];
-					CGPoint newBodyPoint = CGPointMake(currentBodyPoint.x, currentBodyPoint.y - 1);
-					[positions replaceObjectAtIndex:i withObject:[[NSValue valueWithCGPoint:newBodyPoint] retain]];
-				}
+				newHeadPoint = CGPointMake(head.x, head.y - 1);
 				break;
 			case DIRECTION_EAST:
-				for (int i = 0; i < bodyLength; ++i) {
-					CGPoint currentBodyPoint = [[positions objectAtIndex:i] CGPointValue];
-					CGPoint newBodyPoint = CGPointMake(currentBodyPoint.x + 1, currentBodyPoint.y);
-					[positions replaceObjectAtIndex:i withObject:[[NSValue valueWithCGPoint:newBodyPoint] retain]];
-				}
+				newHeadPoint = CGPointMake(head.x + 1, head.y);
 				break;
 			default:
 				[NSException raise:NSInternalInconsistencyException format:@""];
 				break;
 		}
+		newHead = [[NSValue valueWithCGPoint:newHeadPoint] retain];
+		[positions insertObject:newHead atIndex:0];
 	}
 
 }

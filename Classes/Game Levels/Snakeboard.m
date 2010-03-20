@@ -29,8 +29,8 @@
 	player = [[Snake alloc] initWithPos:CGPointMake(5.0f, 5.0f) length:3];
 	[tileWorld setSnake:player];
 	
-	Animation *anim = [[Animation alloc] initWithAnim:@"emumom.png"];
-	Consumable *consumable = [[Consumable alloc] initWithPos:CGPointMake(100.0f, 100.0f) sprite:[Sprite spriteWithAnimation:anim]];
+	Animation *anim = [[Animation alloc] initWithAnim:@"Blue_gem.png"];
+	Consumable *consumable = [[Consumable alloc] initWithPos:CGPointMake(1.0f, 1.0f) sprite:[Sprite spriteWithAnimation:anim]];
 	[anim autorelease];
 	[tileWorld addEntity:consumable];
 	
@@ -55,8 +55,7 @@
 	
 	int fps = [((Snake_PuzzleAppDelegate *)m_pManager) getFramesPerSecond];
 	NSString *fpsStr = [NSString stringWithFormat:@"%d", fps];
-	DLog(@"%@", fpsStr);
-	[[gResManager defaultFont] drawString:fpsStr atPoint:CGPointMake(50.0f, 50.0f)];
+	[[gResManager defaultFont] drawString:fpsStr atPoint:CGPointMake(450.0f, 300.0f)];
 	
 	[self swapBuffers];
 }

@@ -45,6 +45,7 @@
 		D07EDEFC115524DB003F0358 /* Animations.plist in Resources */ = {isa = PBXBuildFile; fileRef = D07EDEFA115524DB003F0358 /* Animations.plist */; };
 		D07EDEFD115524DB003F0358 /* emumom.png in Resources */ = {isa = PBXBuildFile; fileRef = D07EDEFB115524DB003F0358 /* emumom.png */; };
 		D07EDF0F11552623003F0358 /* Snake Puzzle.png in Resources */ = {isa = PBXBuildFile; fileRef = D07EDF0E11552623003F0358 /* Snake Puzzle.png */; };
+		D07EDF7111553C01003F0358 /* Blue_gem.png in Resources */ = {isa = PBXBuildFile; fileRef = D07EDF7011553C01003F0358 /* Blue_gem.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		D07EDEFA115524DB003F0358 /* Animations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Animations.plist; path = Resources/Animations.plist; sourceTree = "<group>"; };
 		D07EDEFB115524DB003F0358 /* emumom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emumom.png; path = Resources/emumom.png; sourceTree = "<group>"; };
 		D07EDF0E11552623003F0358 /* Snake Puzzle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Snake Puzzle.png"; path = "Resources/Snake Puzzle.png"; sourceTree = "<group>"; };
+		D07EDF7011553C01003F0358 /* Blue_gem.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Blue_gem.png; path = Resources/Blue_gem.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +265,7 @@
 		D05ECEAB1152627A00B3FB26 /* Snake Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D07EDF7011553C01003F0358 /* Blue_gem.png */,
 				D07EDEFA115524DB003F0358 /* Animations.plist */,
 				D07EDEFB115524DB003F0358 /* emumom.png */,
 				D05ECEAD1152629E00B3FB26 /* Body.png */,
@@ -328,6 +331,7 @@
 				D07EDEFC115524DB003F0358 /* Animations.plist in Resources */,
 				D07EDEFD115524DB003F0358 /* emumom.png in Resources */,
 				D07EDF0F11552623003F0358 /* Snake Puzzle.png in Resources */,
+				D07EDF7111553C01003F0358 /* Blue_gem.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

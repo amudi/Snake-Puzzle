@@ -41,7 +41,10 @@
 		D05ECEB71152629E00B3FB26 /* Tail.png in Resources */ = {isa = PBXBuildFile; fileRef = D05ECEB11152629E00B3FB26 /* Tail.png */; };
 		D05ECEB81152629E00B3FB26 /* trimsqueak.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D05ECEB21152629E00B3FB26 /* trimsqueak.mp3 */; };
 		D05ECECF115264A600B3FB26 /* SnakeTileWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = D05ECECE115264A600B3FB26 /* SnakeTileWorld.m */; };
-		D05ED06F1152958800B3FB26 /* Snake Puzzle.png in Resources */ = {isa = PBXBuildFile; fileRef = D05ED06E1152958800B3FB26 /* Snake Puzzle.png */; };
+		D07EDEB111551B22003F0358 /* Consumable.m in Sources */ = {isa = PBXBuildFile; fileRef = D07EDEB011551B22003F0358 /* Consumable.m */; };
+		D07EDEFC115524DB003F0358 /* Animations.plist in Resources */ = {isa = PBXBuildFile; fileRef = D07EDEFA115524DB003F0358 /* Animations.plist */; };
+		D07EDEFD115524DB003F0358 /* emumom.png in Resources */ = {isa = PBXBuildFile; fileRef = D07EDEFB115524DB003F0358 /* emumom.png */; };
+		D07EDF0F11552623003F0358 /* Snake Puzzle.png in Resources */ = {isa = PBXBuildFile; fileRef = D07EDF0E11552623003F0358 /* Snake Puzzle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -100,7 +103,11 @@
 		D05ECEB21152629E00B3FB26 /* trimsqueak.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = trimsqueak.mp3; path = Resources/trimsqueak.mp3; sourceTree = "<group>"; };
 		D05ECECD115264A600B3FB26 /* SnakeTileWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SnakeTileWorld.h; path = "Game Engine/SnakeTileWorld.h"; sourceTree = "<group>"; };
 		D05ECECE115264A600B3FB26 /* SnakeTileWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SnakeTileWorld.m; path = "Game Engine/SnakeTileWorld.m"; sourceTree = "<group>"; };
-		D05ED06E1152958800B3FB26 /* Snake Puzzle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Snake Puzzle.png"; sourceTree = "<group>"; };
+		D07EDEAF11551B22003F0358 /* Consumable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Consumable.h; path = Entities/Consumable.h; sourceTree = "<group>"; };
+		D07EDEB011551B22003F0358 /* Consumable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Consumable.m; path = Entities/Consumable.m; sourceTree = "<group>"; };
+		D07EDEFA115524DB003F0358 /* Animations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Animations.plist; path = Resources/Animations.plist; sourceTree = "<group>"; };
+		D07EDEFB115524DB003F0358 /* emumom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = emumom.png; path = Resources/emumom.png; sourceTree = "<group>"; };
+		D07EDF0E11552623003F0358 /* Snake Puzzle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Snake Puzzle.png"; path = "Resources/Snake Puzzle.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,7 +181,7 @@
 				2899E5210DE3E06400AC0155 /* Snake_PuzzleViewController.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Snake_Puzzle-Info.plist */,
-				D05ED06E1152958800B3FB26 /* Snake Puzzle.png */,
+				D07EDF0E11552623003F0358 /* Snake Puzzle.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -238,6 +245,8 @@
 			children = (
 				D05ECDA6115257B900B3FB26 /* Snake.h */,
 				D05ECDA7115257B900B3FB26 /* Snake.m */,
+				D07EDEAF11551B22003F0358 /* Consumable.h */,
+				D07EDEB011551B22003F0358 /* Consumable.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -254,6 +263,8 @@
 		D05ECEAB1152627A00B3FB26 /* Snake Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D07EDEFA115524DB003F0358 /* Animations.plist */,
+				D07EDEFB115524DB003F0358 /* emumom.png */,
 				D05ECEAD1152629E00B3FB26 /* Body.png */,
 				D05ECEAE1152629E00B3FB26 /* Head.png */,
 				D05ECEAF1152629E00B3FB26 /* Snakeboard_tiles.png */,
@@ -314,7 +325,9 @@
 				D05ECEB61152629E00B3FB26 /* Snakeboard.txt in Resources */,
 				D05ECEB71152629E00B3FB26 /* Tail.png in Resources */,
 				D05ECEB81152629E00B3FB26 /* trimsqueak.mp3 in Resources */,
-				D05ED06F1152958800B3FB26 /* Snake Puzzle.png in Resources */,
+				D07EDEFC115524DB003F0358 /* Animations.plist in Resources */,
+				D07EDEFD115524DB003F0358 /* emumom.png in Resources */,
+				D07EDF0F11552623003F0358 /* Snake Puzzle.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +357,7 @@
 				D05ECDA8115257B900B3FB26 /* Snake.m in Sources */,
 				D05ECDAD115257DC00B3FB26 /* Snakeboard.m in Sources */,
 				D05ECECF115264A600B3FB26 /* SnakeTileWorld.m in Sources */,
+				D07EDEB111551B22003F0358 /* Consumable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

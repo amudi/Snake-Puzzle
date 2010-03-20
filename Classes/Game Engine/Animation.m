@@ -61,7 +61,7 @@
 	animData = [NSPropertyListSerialization propertyListFromData:pData mutabilityOption:NSPropertyListImmutable format:&format errorDescription:&error];
 	
 	if (error) {
-		NSLog(@"plist read error %@", error);
+		DLog(@"plist read error %@", error);
 		[error release];
 	}
 	
@@ -82,7 +82,7 @@
 		NSArray *wh = [[animData objectForKey:@"frameSize"] componentsSeparatedByString:@"x"];
 		frameWidth = [[wh objectAtIndex:0] intValue];
 		frameHeight = [[wh objectAtIndex:1] intValue];
-		NSLog(@"framesize read as %f, %f", frameWidth, frameHeight);
+		DLog(@"framesize read as %f, %f", frameWidth, frameHeight);
 	}
 	
 	// anchor is the position in the image that is considered the center, in pixel, relative to the bottom left corner

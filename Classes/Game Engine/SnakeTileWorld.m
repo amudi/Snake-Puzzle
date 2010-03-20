@@ -49,7 +49,7 @@
 	[self allocateWidth:width height:height];
 	++rowIndex;
 	
-	NSLog(@"loadlevel dimension %d%d", width, height);
+	DLog(@"loadlevel dimension %d%d", width, height);
 	
 	for (int y = 0; y < worldHeight; ++y) {
 		NSArray *row = [[rows objectAtIndex:rowIndex] componentsSeparatedByString:@","];
@@ -144,7 +144,7 @@
 	int xTilePos = (xScreenPosInt / TILE_SIZE) + (xScreenPosInt % TILE_SIZE > 0 ? 1 : 0);
 	int yTilePos = (yScreenPosInt / TILE_SIZE) + (yScreenPosInt % TILE_SIZE > 0 ? 1 : 0);
 	
-	NSLog(@"tap at tile (%d, %d)", xTilePos, yTilePos);
+	DLog(@"tap at tile (%d, %d)", xTilePos, yTilePos);
 	return CGPointMake(xTileOff + xTilePos, yTileOff + yTilePos);
 }
 

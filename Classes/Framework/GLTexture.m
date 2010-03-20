@@ -95,7 +95,7 @@
 		}
 		glBindTexture(GL_TEXTURE_2D, saveName); //restore the previous texture binding.
 		
-		//NSLog(@"name %d, savename %d", _name, saveName);
+		//DLog(@"name %d, savename %d", _name, saveName);
 		
 		_size = size;
 		_width = width;
@@ -151,7 +151,7 @@
 	
 	if(image == NULL) {
 		[self release];
-		NSLog(@"Image is Null");
+		DLog(@"Image is Null");
 		return nil;
 	}
 	

@@ -38,7 +38,7 @@ ResourceManager *gResManager;
 	storage = [[NSMutableDictionary alloc] init];
 	[storage setDictionary:[NSDictionary dictionaryWithContentsOfFile:storagePath]];
 	if (storage == nil) {
-		NSLog(@"creating empty storage");
+		DLog(@"creating empty storage");
 		storage = [[NSMutableDictionary alloc] init];
 		storageDirty = YES;
 	}
@@ -101,7 +101,7 @@ ResourceManager *gResManager;
 	UInt32 loadedSound;
 	SoundEngine_LoadEffect([fullPath UTF8String], &loadedSound);
 	[sounds setValue:[NSNumber numberWithInt:loadedSound] forKey:filename];
-	NSLog(@"loaded sound:%@", filename);
+	DLog(@"loaded sound:%@", filename);
 	return loadedSound;
 }
 
@@ -170,7 +170,7 @@ ResourceManager *gResManager;
 
 - (GLFont *)defaultFont {
 	if (defaultFont == nil) {
-		defaultFont = [[GLFont alloc] initWithString:@"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,.?!@/: "
+		defaultFont = [[GLFont alloc] initWithString:@"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ,.?!@/: "
 			fontName:@"Helvetica"
 			fontSize:12.0f
 			strokeWidth:1.0f
@@ -201,7 +201,7 @@ ResourceManager *gResManager;
 	NSDictionary *datas = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
 	NSArray *keys = [datas allKeys];
 	for (int i = 0; i < keys.count; ++i) {
-		NSLog(@"key %@ val %@", [keys objectAtIndex:i], [datas objectForKey:[keys objectAtIndex:i]]);
+		DLog(@"key %@ val %@", [keys objectAtIndex:i], [datas objectForKey:[keys objectAtIndex:i]]);
 	}
 }
 

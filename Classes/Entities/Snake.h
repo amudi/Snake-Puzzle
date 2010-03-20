@@ -22,23 +22,26 @@ typedef enum {
 	SnakeDirection direction;
 	BOOL celebrating;
 	BOOL dying;
-	int speed;
+	CGFloat speed;
 	SnakeTileWorld *world;
 @private
 	NSString *headTextureName;
 	NSString *tailTextureName;
 	NSString *bodyTextureName;
 	NSMutableArray *positions;	// array of tiles (CGPoint) coordinates of snake's blocks
-	int bodyBlockSize;
+	NSInteger bodyLength;
+	NSInteger bodyBlockSize;
+	CGFloat movedDistance;
 }
 
 @property (readonly) SnakeDirection direction;
 @property (nonatomic) BOOL celebrating;
-@property (nonatomic, assign) int speed;
+@property (nonatomic, assign) CGFloat speed;
 @property (nonatomic, retain) NSString *headTextureName;
 @property (nonatomic, retain) NSString *tailTextureName;
 @property (nonatomic, retain) NSString *bodyTextureName;
-@property (nonatomic, assign) int bodyBlockSize;
+@property (nonatomic, assign) NSInteger bodyLength;
+@property (nonatomic, assign) NSInteger bodyBlockSize;
 @property (nonatomic, retain) NSMutableArray *positions;
 
 - (id)initWithPos:(CGPoint)pos length:(NSInteger)length;
@@ -54,5 +57,6 @@ typedef enum {
 - (void)turnLeft;
 - (void)turnRight;
 - (CGPoint)getDestination;
+- (void)moveForward;
 
 @end

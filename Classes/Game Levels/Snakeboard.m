@@ -37,6 +37,7 @@
 	float time = LOOP_TIMER_MINIMUM;
 	
 	//[tileWorld setCamera:[[[player positions] objectAtIndex:0] CGPointValue]];
+	[player update:time];
 	
 	[super updateEndGame:time];
 }
@@ -64,8 +65,13 @@
 	UITouch *touch = [touches anyObject];
 	
 	// check whether player touch left button or right button
-	[tileWorld worldPosition:[self touchPosition:touch]];
-	[super touchEndGame];
+	CGPoint touchPos = [tileWorld worldPosition:[self touchPosition:touch]];
+	if (touchPos.x <= [tileWorld worldWidth] / 2) {
+		[player turnLeft];
+	} else {
+		[player turnRight];
+	}
+
 }
 
 - (int)getBoardHeight {

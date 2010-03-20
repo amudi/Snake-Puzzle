@@ -61,7 +61,7 @@
 		height = i;
 	}
 	
-	NSLog(@"allocating font texture, dimensions %dx%d", width, height);
+	DLog(@"allocating font texture, dimensions %dx%d", width, height);
 	
 	colorSpace = CGColorSpaceCreateDeviceRGB();
 	data = malloc(height * width * 4);

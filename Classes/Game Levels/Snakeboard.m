@@ -49,7 +49,9 @@
 	[tileWorld draw];
 	
 	int fps = [((Snake_PuzzleAppDelegate *)m_pManager) getFramesPerSecond];
-	NSLog(@"FPS:%d", fps);
+	NSString *fpsStr = [NSString stringWithFormat:@"%d", fps];
+	DLog(@"%@", fpsStr);
+	[[gResManager defaultFont] drawString:fpsStr atPoint:CGPointMake(50.0f, 50.0f)];
 	
 	[self swapBuffers];
 }

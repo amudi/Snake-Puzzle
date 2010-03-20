@@ -71,7 +71,7 @@ float thetaToward(float a, float b, float step) {
 	if (b < 0) b += 2 * PI;
 	
 	if (a < 0 || b < 0) {
-		NSLog(@"shouldn't happen.");
+		DLog(@"shouldn't happen.");
 	}
 	
 	//if(a==b) return a;

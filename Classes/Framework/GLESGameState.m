@@ -63,7 +63,7 @@ CGSize _size;
 	newSize.width = roundf(newSize.width);
 	newSize.height = roundf(newSize.height);
 	
-	NSLog(@"dimension %f x %f", newSize.width, newSize.height);
+	DLog(@"dimension %f x %f", newSize.width, newSize.height);
 	
 	_size = newSize;
 	glViewport(0, 0, newSize.width, newSize.height);
@@ -91,7 +91,7 @@ CGSize _size;
 - (BOOL)bindLayer {
 	CAEAGLLayer *eaglLayer = (CAEAGLLayer *)[self layer];
 	
-	NSLog(@"layer %@", eaglLayer);
+	DLog(@"layer %@", eaglLayer);
 	
 	// set up a few drawing properties
 	// TODO: benchmark this
@@ -131,12 +131,12 @@ CGSize _size;
 	glGetIntegerv(GL_RENDERBUFFER_BINDING_OES, (GLint *)&oldRenderBuffer);
 	glBindRenderbufferOES(GL_RENDERBUFFER_OES, glesRenderBuffer);
 	
-	//NSLog(@"oldrenderbuffer %d, renderbuffer %d", oldRenderBuffer, glesRenderBuffer);
+	//DLog(@"oldrenderbuffer %d, renderbuffer %d", oldRenderBuffer, glesRenderBuffer);
 	
 	glFinish();
 		
 	if (![glesContext presentRenderbuffer:GL_RENDERBUFFER_OES]) {
-		NSLog(@"failed to swap render buffer in %s", __FUNCTION__);
+		DLog(@"failed to swap render buffer in %s", __FUNCTION__);
 	}
 }
 
@@ -163,7 +163,7 @@ CGSize _size;
 	if (landscape) {
 		point2.x = self.frame.size.height - point.y;
 		point2.y = point.x;
-		//NSLog(@"touch original: (%f, %f), touch converted: (%f. %f)", point.x, point.y, point2.x, point2.y);
+		//DLog(@"touch original: (%f, %f), touch converted: (%f. %f)", point.x, point.y, point2.x, point2.y);
 	}	
 	return point2;
 }

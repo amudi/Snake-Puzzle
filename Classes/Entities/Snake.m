@@ -29,7 +29,7 @@
 	direction = DIRECTION_EAST;	// facing right
 	celebrating = NO;
 	dying = NO;
-	speed = 5;	// default speed
+	speed = 10;	// default speed
 
 	headTextureName = @"Head.png";
 	bodyTextureName = @"Body.png";
@@ -56,7 +56,7 @@
 
 // force move the whole snake to pos, arrange body in a straight line
 - (void)forceToPos:(CGPoint)pos {
-	NSLog(@"forceToPos:%@, old positions: %@", pos, positions);
+	DLog(@"forceToPos:%@, old positions: %@", pos, positions);
 	if ([world walkable:pos]) {
 		NSInteger i = 0;
 		for (id currentBlockPosObject in positions) {
@@ -67,7 +67,7 @@
 			++i;
 		}
 	}
-	NSLog(@"New positions: %@", positions);
+	DLog(@"New positions: %@", positions);
 }
 
 - (void)dieWithAnimation:(NSString *)deathAnim {
@@ -87,9 +87,9 @@
 	if (movedDistance >= 1.0f) {
 		movedDistance -= 1.0f;
 		[self moveForward];
+		
+		[self drawAtPoint:CGPointMake(0.0f, 0.0f)];
 	}
-	
-	[self drawAtPoint:CGPointMake(0.0f, 0.0f)];
 }
 
 - (void)addBody {

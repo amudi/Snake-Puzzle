@@ -77,12 +77,12 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-	NSLog(@"appdelegate release");
+	DLog(@"appdelegate release");
 	[gResManager shutdown];
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
-	NSLog(@"low memory, purging cache");
+	DLog(@"low memory, purging cache");
 	[gResManager purgeSounds];
 	[gResManager purgeTextures];
 }

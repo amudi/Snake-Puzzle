@@ -14,7 +14,7 @@
 #import "Animation.h"
 #import "Snake.h"
 #import "Snake_PuzzleAppDelegate.h"
-
+#import "Consumable.h"
 
 @implementation Snakeboard
 
@@ -28,6 +28,11 @@
 	
 	player = [[Snake alloc] initWithPos:CGPointMake(5.0f, 5.0f) length:3];
 	[tileWorld setSnake:player];
+	
+	Animation *anim = [[Animation alloc] initWithAnim:@"emumom.png"];
+	Consumable *consumable = [[Consumable alloc] initWithPos:CGPointMake(100.0f, 100.0f) sprite:[Sprite spriteWithAnimation:anim]];
+	[anim autorelease];
+	[tileWorld addEntity:consumable];
 	
 	[gResManager stopMusic];
 	[gResManager playMusic:@"trimsqueak.mp3"];

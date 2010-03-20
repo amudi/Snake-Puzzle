@@ -19,6 +19,7 @@
 @synthesize headTextureName;
 @synthesize tailTextureName;
 @synthesize bodyTextureName;
+@synthesize bodyLength;
 @synthesize bodyBlockSize;
 @synthesize positions;
 
@@ -28,13 +29,15 @@
 	direction = DIRECTION_EAST;	// facing right
 	celebrating = NO;
 	dying = NO;
-	speed = 200;	// default speed
+	speed = 5;	// default speed
 
 	headTextureName = @"Head.png";
 	bodyTextureName = @"Body.png";
 	tailTextureName = @"Tail.png";
 	
-	NSInteger bodyLength = length;
+	movedDistance = 0.0f;
+	
+	bodyLength = length;
 	if (bodyLength <= 3) {
 		bodyLength = 3;	// length minimum should be 3: head-body-tail
 	}
@@ -75,100 +78,18 @@
 }
 
 - (void)update:(CGFloat)time {
-	float xSpeed = speed * time;
-	float ySpeed = speed * time;
+	movedDistance += speed * time;
 	
 	if (dying) {
-		xSpeed = ySpeed = 0;
+		speed = 0;
 	}
 	
-	// determine destination
-	CGPoint destPos = [self getDestination];
-	
-	NSMutableArray* revertPositions = [NSMutableArray arrayWithArray:positions];
-	CGPoint revertPos = [[revertPositions objectAtIndex:0] CGPointValue];
-	CGPoint worldPos = [[positions objectAtIndex:0] CGPointValue];
-	float dx = worldPos.x - destPos.x;
-	if (dx != 0) {
-		if (fabs(dx) < xSpeed) {
-			worldPos.x = destPos.x;
-		} else {
-			worldPos.x += -sign(dx) * xSpeed;
-		}
+	if (movedDistance >= 1.0f) {
+		movedDistance -= 1.0f;
+		[self moveForward];
 	}
 	
-	float dy = worldPos.y - destPos.y;
-	if (dy != 0) {
-		if (fabs(dy) < ySpeed) {
-			worldPos.y = destPos.y;
-		} else {
-			worldPos.y += -sign(dy) * ySpeed;
-		}
-	}
-	
-	if (![world walkable:worldPos]) {
-		if ([world walkable:CGPointMake(worldPos.x, revertPos.y)]) {
-			// just revert y so we can slide along the wall
-			worldPos = CGPointMake(worldPos.x, revertPos.y);
-			if (dx == 0) destPos = worldPos;
-		} else if ([world walkable:CGPointMake(revertPos.x, worldPos.y)]) {
-			// just revert x so we can slide along wall
-			worldPos = CGPointMake(revertPos.x, worldPos.y);
-			if (dy == 0) destPos = worldPos;
-		} else {
-			// can't move here
-			worldPos = revertPos;
-			destPos = worldPos;
-		}
-	}
-		
-	NSString *facing = nil;
-	SnakeDirection nextDirection = DIRECTION_UNKNOWN;
-	if (dx != 0 || dy != 0) {
-		if (fabs(dx) > fabs(dy)) {
-			if (dx < 0) {
-				nextDirection = DIRECTION_EAST;
-			} else {
-				nextDirection = DIRECTION_WEST;
-			}
-		} else {
-			if (dy < 0) {
-				nextDirection = DIRECTION_NORTH;
-			} else {
-				nextDirection = DIRECTION_SOUTH;
-			}
-		}
-		direction = nextDirection;
-	}
-	
-	if (direction == DIRECTION_UNKNOWN) {
-		if (celebrating) {
-			facing = @"celebration";
-		} else {
-			// idle
-			NSString *idles[] = {
-				@"idle-up", @"idle-left", @"idle", @"idle-right"
-			};
-			facing = idles[direction];
-		}
-	} else {
-		NSString *walks[] = {
-			@"walkup", @"walkleft", @"walkdown", @"walkright"
-		};
-		facing = walks[direction];
-	}
-	
-	if (dying) {
-		// let the dying animation proceed
-	} else {
-		// check if different than current facing
-		//if (facing && ![sprite.sequence isEqualToString:facing]) {
-			// TODO: set facing
-		//}
-	}
-	
-	// update graphic
-	//[sprite update:time];
+	[self drawAtPoint:CGPointMake(0.0f, 0.0f)];
 }
 
 - (void)addBody {
@@ -197,7 +118,7 @@
 	CGPoint destination;
 	switch (direction) {
 		case DIRECTION_NORTH:
-			destination = CGPointMake(headPosition.x, IPHONE_WIDTH);
+			destination = CGPointMake(headPosition.x, IPHONE_WIDTH / TILE_SIZE);
 			break;
 		case DIRECTION_WEST:
 			destination = CGPointMake(0, headPosition.y);
@@ -206,7 +127,7 @@
 			destination = CGPointMake(headPosition.x, 0);
 			break;
 		case DIRECTION_EAST:
-			destination = CGPointMake(IPHONE_HEIGHT, headPosition.y);
+			destination = CGPointMake(IPHONE_HEIGHT / TILE_SIZE, headPosition.y);
 			break;
 		default:
 			[NSException raise:NSInternalInconsistencyException format:@""];
@@ -253,6 +174,55 @@
 			[NSException raise:NSInternalInconsistencyException format:@""];
 			break;
 	}
+}
+
+- (void)moveForward {
+	// determine destination
+	CGPoint destPos = [self getDestination];
+	
+	// move last block of body to the front
+	CGPoint headPosition = [[positions objectAtIndex:0] CGPointValue];
+	
+	if (headPosition.x == destPos.x && headPosition.y == destPos.y) {
+		// collided with wall?
+		dying = YES;
+		return;
+	} else {
+		switch (direction) {
+			case DIRECTION_NORTH: 
+				for (int i = 0; i < bodyLength; ++i) {
+					CGPoint currentBodyPoint = [[positions objectAtIndex:i] CGPointValue];
+					CGPoint newBodyPoint = CGPointMake(currentBodyPoint.x, currentBodyPoint.y + 1);
+					[positions replaceObjectAtIndex:i withObject:[[NSValue valueWithCGPoint:newBodyPoint] retain]];
+				}
+				break;
+			case DIRECTION_WEST:
+				for (int i = 0; i < bodyLength; ++i) {
+					CGPoint currentBodyPoint = [[positions objectAtIndex:i] CGPointValue];
+					CGPoint newBodyPoint = CGPointMake(currentBodyPoint.x - 1, currentBodyPoint.y);
+					[positions replaceObjectAtIndex:i withObject:[[NSValue valueWithCGPoint:newBodyPoint] retain]];
+				}
+				break;
+			case DIRECTION_SOUTH:
+				for (int i = 0; i < bodyLength; ++i) {
+					CGPoint currentBodyPoint = [[positions objectAtIndex:i] CGPointValue];
+					CGPoint newBodyPoint = CGPointMake(currentBodyPoint.x, currentBodyPoint.y - 1);
+					[positions replaceObjectAtIndex:i withObject:[[NSValue valueWithCGPoint:newBodyPoint] retain]];
+				}
+				break;
+			case DIRECTION_EAST:
+				for (int i = 0; i < bodyLength; ++i) {
+					CGPoint currentBodyPoint = [[positions objectAtIndex:i] CGPointValue];
+					CGPoint newBodyPoint = CGPointMake(currentBodyPoint.x + 1, currentBodyPoint.y);
+					[positions replaceObjectAtIndex:i withObject:[[NSValue valueWithCGPoint:newBodyPoint] retain]];
+				}
+				break;
+			default:
+				[NSException raise:NSInternalInconsistencyException format:@""];
+				break;
+		}
+	}
+
 }
 
 - (void)dealloc {

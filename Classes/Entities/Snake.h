@@ -34,8 +34,9 @@ typedef enum {
 	CGFloat movedDistance;
 }
 
-@property (readonly) SnakeDirection direction;
-@property (nonatomic) BOOL celebrating;
+@property (nonatomic, assign) SnakeDirection direction;
+@property (nonatomic, assign) BOOL dying;
+@property (nonatomic, assign) BOOL celebrating;
 @property (nonatomic, assign) CGFloat speed;
 @property (nonatomic, retain) NSString *headTextureName;
 @property (nonatomic, retain) NSString *tailTextureName;

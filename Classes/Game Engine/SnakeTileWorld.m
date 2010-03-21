@@ -49,7 +49,7 @@
 	[self allocateWidth:width height:height];
 	++rowIndex;
 	
-	DLog(@"loadlevel dimension %d%d", width, height);
+	DLog(@"loadlevel dimension %dx%d", width, height);
 	
 	for (int y = 0; y < worldHeight; ++y) {
 		NSArray *row = [[rows objectAtIndex:rowIndex] componentsSeparatedByString:@","];

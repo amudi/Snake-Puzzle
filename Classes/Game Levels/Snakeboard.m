@@ -24,15 +24,21 @@
 - (void)setupWorld {
 	tileWorld = [[SnakeTileWorld alloc] initWithFrame:self.frame];
 	[tileWorld setLandscape:landscape];
-	[tileWorld loadLevel:@"Snakeboard.txt" withTiles:@"Snakeboard_tiles.png"];
+	[tileWorld loadLevel:@"Snakeboard.txt" withTiles:@"Snakeboard.png"];
 	
 	player = [[Snake alloc] initWithPos:CGPointMake(5.0f, 5.0f) length:3];
 	[tileWorld setSnake:player];
 	
 	Animation *anim = [[Animation alloc] initWithAnim:@"Blue_gem.png"];
-	Consumable *consumable = [[Consumable alloc] initWithPos:CGPointMake(1.0f, 1.0f) sprite:[Sprite spriteWithAnimation:anim]];
+	Consumable *consumable1 = [[Consumable alloc] initWithPos:CGPointMake(0.0f, 0.0f) sprite:[Sprite spriteWithAnimation:anim]];
+	Consumable *consumable2 = [[Consumable alloc] initWithPos:CGPointMake(14.0f, 0.0f) sprite:[Sprite spriteWithAnimation:anim]];
+	Consumable *consumable3 = [[Consumable alloc] initWithPos:CGPointMake(14.0f, 9.0f) sprite:[Sprite spriteWithAnimation:anim]];
+	Consumable *consumable4 = [[Consumable alloc] initWithPos:CGPointMake(0.0f, 9.0f) sprite:[Sprite spriteWithAnimation:anim]];
 	[anim autorelease];
-	[tileWorld addEntity:consumable];
+	[tileWorld addEntity:consumable1];
+	[tileWorld addEntity:consumable2];
+	[tileWorld addEntity:consumable3];
+	[tileWorld addEntity:consumable4];
 	
 	[gResManager stopMusic];
 	[gResManager playMusic:@"trimsqueak.mp3"];
@@ -70,14 +76,20 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [touches anyObject];
 	
-	// check whether player touch left button or right button
-	CGPoint touchPos = [tileWorld worldPosition:[self touchPosition:touch]];
-	if (touchPos.x <= [tileWorld worldWidth] / 2) {
-		[player turnLeft];
+	if ([player dying]) {
+		[player forceToPos:CGPointMake(5.0f, 5.0f)];
+		[player setSpeed:10.0f];
+		[player setDying:NO];
+		[player setDirection:DIRECTION_EAST];
 	} else {
-		[player turnRight];
+		// check whether player touch left button or right button
+		CGPoint touchPos = [tileWorld worldPosition:[self touchPosition:touch]];
+		if (touchPos.x <= [tileWorld worldWidth] / 2) {
+			[player turnLeft];
+		} else {
+			[player turnRight];
+		}
 	}
-
 }
 
 - (int)getBoardHeight {

@@ -15,6 +15,7 @@
 
 @synthesize direction;
 @synthesize celebrating;
+@synthesize dying;
 @synthesize speed;
 @synthesize headTextureName;
 @synthesize tailTextureName;
@@ -56,18 +57,17 @@
 
 // force move the whole snake to pos, arrange body in a straight line
 - (void)forceToPos:(CGPoint)pos {
-	DLog(@"forceToPos:%@, old positions: %@", pos, positions);
-	if ([world walkable:pos]) {
-		NSInteger i = 0;
-		for (id currentBlockPosObject in positions) {
-			CGPoint currentBlockPos = [currentBlockPosObject CGPointValue];
-			CGPoint newBlockPos = CGPointMake(currentBlockPos.x - (i * bodyBlockSize), currentBlockPos.y);
-			[positions replaceObjectAtIndex:i withObject:[NSValue valueWithCGPoint:newBlockPos]];
+	//DLog(@"forceToPos:%@, old positions: %@", pos, positions);
+	CGPoint worldPos = CGPointMake(pos.x * TILE_SIZE, pos.y * TILE_SIZE);
+	if ([world walkable:worldPos]) {
+		for (int i = 0; i < bodyLength; ++i) {
+			NSValue *currentBlockPosObject = [positions objectAtIndex:i];
+			CGPoint newBlockPos = CGPointMake(pos.x - i, pos.y);
+			[positions replaceObjectAtIndex:i withObject:[[NSValue valueWithCGPoint:newBlockPos] retain]];
 			[currentBlockPosObject release];
-			++i;
 		}
 	}
-	DLog(@"New positions: %@", positions);
+	//DLog(@"New positions: %@", positions);
 }
 
 - (void)dieWithAnimation:(NSString *)deathAnim {
@@ -109,6 +109,10 @@
 		screenPos.y += worldPos.y;
 		screenPos.x *= TILE_SIZE;
 		screenPos.y *= TILE_SIZE;
+		
+		// need to offset half a tile to get a correct draw
+		screenPos.x += TILE_SIZE / 2;
+		screenPos.y += TILE_SIZE / 2;
 		[bodyTex drawAtPoint:screenPos];
 	}
 }
@@ -118,7 +122,7 @@
 	CGPoint destination;
 	switch (direction) {
 		case DIRECTION_NORTH:
-			destination = CGPointMake(headPosition.x, IPHONE_WIDTH / TILE_SIZE);
+			destination = CGPointMake(headPosition.x, IPHONE_WIDTH / TILE_SIZE - 1);
 			break;
 		case DIRECTION_WEST:
 			destination = CGPointMake(0, headPosition.y);
@@ -127,7 +131,7 @@
 			destination = CGPointMake(headPosition.x, 0);
 			break;
 		case DIRECTION_EAST:
-			destination = CGPointMake(IPHONE_HEIGHT / TILE_SIZE, headPosition.y);
+			destination = CGPointMake(IPHONE_HEIGHT / TILE_SIZE - 1, headPosition.y);
 			break;
 		default:
 			[NSException raise:NSInternalInconsistencyException format:@""];
